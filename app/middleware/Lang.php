@@ -127,6 +127,9 @@ class Lang
             '组长' => 'team leader',
             '请输入推送链接'=>'Please enter the push link',
             '推送连接'=>'Push connection',
+            '推送链接'=>'Push link',
+            '推送连接必须填写'=>'Push connection must be filled in',
+            '请输入推送连接URL'=>'Please enter the push connection URL',
             '上传图片（最多9张）' => 'Upload images (up to 9)',
             '上传图片' => 'Upload image',
             '选择图片' => 'Select image',
@@ -166,7 +169,8 @@ class Lang
                     '您无权限'              =>  'You do not have permission',
                     '操作人不一致'          =>  'Inconsistent operators',
                     '编辑人不一致'          =>  'Inconsistent editors',
-                    '当前更新未成功'        =>  'The current update was unsuccessful'
+                    '当前更新未成功'        =>  'The current update was unsuccessful',
+                    '推送连接必须填写'      =>  'Push connection must be filled in'
         ];
 
         array_walk_recursive($data, function (&$value) use ($translations) {
@@ -245,6 +249,9 @@ class Lang
             '组长' => 'អ្នកដឹកនាំក្រុម',
             '请输入推送链接' => 'សូមបញ្ចូលតំណភ្ជាប់',
             '推送连接' => 'តំណភ្ជាប់',
+            '推送链接' => 'តំណភ្ជាប់',
+            '推送连接必须填写' => 'តំណភ្ជាប់ត្រូវតែបំពេញ',
+            '请输入推送连接URL' => 'សូមបញ្ចូល URL តំណភ្ជាប់',
             '上传图片（最多9张）' => 'ផ្ទុករូបភាព (ច្រើនបំផុត 9)',
             '上传图片' => 'ផ្ទុករូបភាព',
             '选择图片' => 'ជ្រើសរូបភាព',
@@ -330,6 +337,9 @@ class Lang
             '组长' => 'Trưởng nhóm',
             '请输入推送链接' => 'Vui lòng nhập liên kết đẩy',
             '推送连接' => 'Liên kết đẩy',
+            '推送链接' => 'Liên kết đẩy',
+            '推送连接必须填写' => 'Liên kết đẩy phải được điền',
+            '请输入推送连接URL' => 'Vui lòng nhập URL liên kết đẩy',
             '上传图片（最多9张）' => 'Tải ảnh lên (tối đa 9)',
             '上传图片' => 'Tải ảnh lên',
             '选择图片' => 'Chọn ảnh',
@@ -369,7 +379,8 @@ class Lang
             '您无权限' => 'អ្នកគ្មានការអនុញ្ញាត',
             '操作人不一致' => 'ប្រតិបត្តិករមិនស្របគ្នា',
             '编辑人不一致' => 'អ្នកកែសម្រួលមិនស្របគ្នា',
-            '当前更新未成功' => 'ការធ្វើបច្ចុប្បន្នភាពបច្ចុប្បន្នមិនទទួលបានជោគជ័យ'
+            '当前更新未成功' => 'ការធ្វើបច្ចុប្បន្នភាពបច្ចុប្បន្នមិនទទួលបានជោគជ័យ',
+            '推送连接必须填写' => 'តំណភ្ជាប់ត្រូវតែបំពេញ'
         ];
 
         array_walk_recursive($data, function (&$value) use ($translations) {
@@ -402,7 +413,8 @@ class Lang
             '您无权限' => 'Bạn không có quyền',
             '操作人不一致' => 'Người thực hiện không khớp',
             '编辑人不一致' => 'Người chỉnh sửa không khớp',
-            '当前更新未成功' => 'Cập nhật hiện tại không thành công'
+            '当前更新未成功' => 'Cập nhật hiện tại không thành công',
+            '推送连接必须填写' => 'Liên kết đẩy phải được điền'
         ];
 
         array_walk_recursive($data, function (&$value) use ($translations) {

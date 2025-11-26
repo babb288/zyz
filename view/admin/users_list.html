@@ -1,0 +1,478 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>会员管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/lib/layui-v2.6.3/css/layui.css" media="all">
+    <link rel="stylesheet" href="/css/public.css" media="all">
+    <style type="text/css">
+        .table-header-fixed {
+            position: fixed;
+            top: 0;
+            z-index: 99
+        }
+
+        .layui-table-cell {
+            line-height: 20px !important;
+            vertical-align: middle;
+            height: auto;
+            overflow: visible;
+            text-overflow: inherit;
+            white-space: normal;
+        }
+
+        .image-cell {
+            text-align: center;
+        }
+        .image-cell img {
+            width: 60px;
+            height: 100px;
+            border-radius: 5px;
+            object-fit: cover;
+            margin: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        .image-cell img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+
+
+
+    </style>
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+
+        <fieldset class="table-search-fieldset">
+            <legend></legend>
+            <div style="margin: 10px 10px 10px 10px">
+                <form class="layui-form layui-form-pane" action="">
+                    <div class="layui-form-item">
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label">标签</label>
+                            <div class="layui-input-inline">
+                                <select name="tag">
+                                    <option value="" class="center"></option>
+                                    　　 <option value="0">普通客户</option>
+                                    <option value="1">潜在客户</option>
+                                    <option value="2">重要客户</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="layui-inline">
+                            <label class="layui-form-label">ID</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="id" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label">手机号</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="phone" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="layui-inline">
+                            <label class="layui-form-label">tiktok</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="tiktok" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="layui-inline">
+                            <label class="layui-form-label">操作人</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="operator" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        <div class="layui-inline">
+                            <label class="layui-form-label">推送链接</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="push_url" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        
+                        
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label">状态</label>
+                            <div class="layui-input-inline">
+                                <select name="status" lay-filter="type">
+                                    <option value="" class="center"></option>
+                                    <option value="1" class="center">已使用</option>
+                                    <option value="0" class="center">未使用</option>
+                                    <option value="2" class="center">无效订单</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label">聊天软件</label>
+                            <div class="layui-input-inline">
+                                <select name="chat_soft" lay-filter="type">
+                                    <option value="" class="center"></option>
+                                    <option value="0" class="center">Telegram</option>
+                                    <option value="1" class="center">WhatsApp</option>
+                                    <option value="2" class="center">Tiktok</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 时间范围 -->
+                        <div class="layui-inline">
+                            <label class="layui-form-label">时间范围</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="start_date" id="start_date" class="layui-input" placeholder="开始时间">
+                            </div>
+                            <div class="layui-input-inline">
+                                <input type="text" name="end_date" id="end_date" class="layui-input" placeholder="结束时间">
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="layui-inline">
+                            <button type="submit" class="layui-btn layui-btn-primary"  lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </fieldset>
+
+        <script type="text/html" id="status">
+            {{#  if(d.status==0){ }}
+                <span>未使用</span>
+            {{#  } else if(d.status == 1) { }}
+                <span style="color:red;">已使用</span>
+            {{#  } else if(d.status == 2) { }}
+                <span style="color:red;">无效订单</span>
+            {{#  } }}
+        </script>
+
+
+        <script type="text/html" id="tag">
+            {{#  if(d.tag == 0){ }}
+            <span>普通客户</span>
+            {{#  } else if(d.tag == 1) { }}
+            <span style="color:red;">潜在客户</span>
+            {{#  } else if(d.tag == 2) { }}
+            <span style="color:red;">重要客户</span>
+            {{#  } }}
+        </script>
+
+
+
+        <script type="text/html" id="chat_soft">
+            {{#  if(d.chat_soft==0){ }}
+            <span style="color:blue">Telegram</span>
+            {{# } else  if(d.chat_soft==2){ }}
+            <span style="color:black">tiktok</span>
+            {{#  } else { }}
+            <span style="color:red;">WhatsApp</span>
+            {{#  } }}
+        </script>
+
+        <script type="text/html" id="sex">
+            {{#  if(d.sex == 1){ }}
+            <span style="color:blue">男</span>
+            {{#  } else if(d.sex == 2) { }}
+            <span style="color:red;">女</span>
+            {{#  } else { }}
+            <span style="color:orange;">未知</span>
+            {{#  } }}
+        </script>
+
+
+
+        <script type="text/html" id="toolbarDemo">
+            <div class="layui-btn-container">
+
+                <button class="layui-btn layui-btn-normal layui-btn-sm " lay-event="recovery"> 会员添加 </button>
+            </div>
+
+        </script>
+
+        <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
+
+        <script type="text/html" id="currentTableBar">
+            <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit">手动编辑</a>
+            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+        </script>
+
+    </div>
+</div>
+<script src="/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+<script>
+    layui.use(['form', 'table'], function () {
+
+        var $ = layui.jquery,
+            form = layui.form,
+            table = layui.table;
+        var laydate = layui.laydate;
+
+        // 初始化开始日期选择器
+        laydate.render({
+            elem: '#start_date',  // 绑定开始时间输入框
+            type: 'datetime',          // 选择日期
+            format: 'yyyy-MM-dd HH:mm:ss',  // 日期格式
+        });
+
+        // 初始化结束日期选择器
+        laydate.render({
+            elem: '#end_date',  // 绑定结束时间输入框
+            type: 'datetime',        // 选择日期
+            format: 'yyyy-MM-dd HH:mm:ss',// 日期格式
+        });
+
+
+        table.render({
+            elem: '#currentTableId',
+            url: '/admin/users/list',
+            toolbar: '#toolbarDemo',
+            cellMinWidth: 80,
+            cols: [[
+                <!-- {type: "checkbox", width: 50}, -->
+                {field: 'id', title: 'ID',align:'center'},
+                {field: 'phone', title: '手机号',align:'center',width: 180},
+                
+                {field: 'tiktok', title: 'tiktok',align:'center',width: 180},
+                
+                {field: 'chat_soft', title: '聊天软件',align:'center',templet: "#chat_soft",width: 100},
+                {field: 'sex',title: '性别',align:'center',templet: "#sex"},
+                {field: 'age',title: '年龄',align:'center'},
+                {field: 'profession',title: '职业',align:'center'},
+                {field: 'marita_status',title: '婚姻状况',align:'center'},
+                {field: 'images',title: '图片',align:'center',width:300,templet:function(d){
+                        if(d.images.length === 0){
+
+                            return '';
+                        }
+                        var images = d.images.split(',');
+
+                        var html = '<div class="image-cell">';
+                        for(var i = 0; i < images.length; i++) {
+                            html += '<img layer-src="' + images[i] + '" src="' + images[i] + '" alt="图片' + (i+1) + '">';
+                        }
+                        html += '</div>';
+                        return html;
+                }},
+                
+                {field: 'name', title: '真实姓名',align:'center'},
+                {field: 'tag', title: '标签',align:'center',templet: "#tag"},
+                {field: 'push_url', title: '推送连接',align:'center',width:200},
+                {field: 'origin', title: '来源',align:'center'},
+                {field: 'region', title: '地区',align:'center'},
+                {field: 'country', title: '国家',align:'center'},
+
+                {field: 'operator', title: '操作人',align:'center',width:100},
+                {field: 'remark', title: '备注',align:'center',width:200,templet:function(e){
+                    if(e.remark != ''){
+                        return '<span style="color:red;">' + e.remark + '</span>';
+                    }
+                    return e.remark;
+                }},
+                {field: 'status',title: '状态',align:'center',templet:"#status"},
+                {
+                    title: '创建时间/更新时间',
+                    align: 'center',
+                    width: 200,
+                    templet: function(d) {
+                        return d.create_time + '</br> ' + (d.update_time == null ? '' : d.update_time);
+                    }
+                },
+                {title: '操作',width: 200,templet: '#currentTableBar',fixed: "right",align: "center"}
+            ]],
+            limits: [10,20,30,50,100,500],
+            limit: 10,
+            page: true,
+            done: function (index, layero) {
+
+        
+                //表头部分
+                //动态监听表头高度变化，冻结行跟着改变高度
+                $(".layui-table-header  tr").resize(function () {
+                    $(".layui-table-header  tr").each(function (index, val) {
+                        $($(".layui-table-fixed .layui-table-header table tr")[index]).height($(val).height());
+                    });
+                });
+                //初始化高度，使得冻结行表头高度一致
+                $(".layui-table-header  tr").each(function (index, val) {
+                    $($(".layui-table-fixed .layui-table-header table tr")[index]).height($(val).height());
+                });
+
+                //表体部分
+                //动态监听表体高度变化，冻结行跟着改变高度
+                $(".layui-table-body  tr").resize(function () {
+                    $(".layui-table-body  tr").each(function (index, val) {
+                        $($(".layui-table-fixed .layui-table-body table tr")[index]).height($(val).height());
+                    });
+                });
+                //初始化高度，使得冻结行表体高度一致
+                $(".layui-table-body  tr").each(function (index, val) {
+                    $($(".layui-table-fixed .layui-table-body table tr")[index]).height($(val).height());
+                });
+            },
+            skin: 'line'
+        });
+
+
+        $(document).on('click', '.image-cell img', function () {
+            var $allImages = $('#currentTableId').next('.layui-table-view').find('.image-cell img');
+        
+            // 找到当前点击图片的索引
+            var startIndex = $allImages.index(this);
+
+
+            // 构造 layer.photos 所需的数据
+            var photoData = $allImages.map(function () {
+                return {
+                    alt: $(this).attr('alt'),
+                    pid: Math.random(),
+                    src: $(this).attr('src'),
+                    thumb: $(this).attr('src')
+                };
+            }).get();
+            
+            
+            layer.photos({
+                photos: {
+                    "title": "所有图片",
+                    "id": new Date().getTime(), // 确保每次唯一
+                    "start": startIndex,
+                    "data": photoData
+                },
+                anim: 5
+            });
+            
+        });
+
+        // 监听搜索操作
+        form.on('submit(data-search-btn)', function (data) {
+
+            var result = data.field;
+
+            for (const key in result) {
+                if (result[key] === "") {
+                    delete result[key];
+                }
+            }
+
+            result = JSON.stringify(data.field);
+            //执行搜索重载
+            table.reload('currentTableId', {
+                page: {
+                    curr: 1
+                }
+                , where: {
+                    searchParams: result
+                }
+            }, 'data');
+            console.log(result);
+            return false;
+        });
+
+        /**
+         * toolbar监听事件
+         */
+        table.on('toolbar(currentTableFilter)', function (obj) {
+            if (obj.event === 'recovery') {  // 监听添加操作
+                layer.open({
+                    type: 2,
+                    title: "会员添加",
+                    content: '/admin/users_add',
+                    maxmin: true,
+                    area: ['500px', '600px'],
+                    btn: ["确定", "取消"],
+                    yes: function(index, layero) {
+                        var formSubmit = layer.getChildFrame('form', index);
+                        var submited = formSubmit.find('#tj')[0];
+                        console.log(submited)
+                        submited.click();
+                    }
+                })
+
+
+            }
+        });
+        //监听表格复选框选择
+        table.on('checkbox(currentTableFilter)', function (obj) {
+            console.log(obj)
+        });
+
+        table.on('tool(currentTableFilter)', function (obj) {
+            var data = obj.data;
+            console.log(data)
+            if (obj.event === 'edit') {
+                layer.open({
+                    type: 2,
+                    title: "手动编辑",
+                    content: '/admin/users_edit?id=' + data.id,
+                    maxmin: true,
+                    area: ['500px', '600px'],
+                    btn: ["确定", "取消"],
+                    yes: function(index, layero) {
+                        var formSubmit = layer.getChildFrame('form', index);
+                        var submited = formSubmit.find('button')[0];
+                        submited.click();
+                    }
+                })
+
+            }else if (obj.event === 'delete') {
+                layer.confirm('确定要删除吗？', {icon: 3, title:'提示'}, function(index){
+
+                    $.ajax({
+                        type:'POST',
+                        dataType:'json',
+                        url:'/admin/users/delete',
+                        data:data,
+                        success:function(result){
+
+                            if(result.code===1){
+                                layer.msg('删除成功',{icon:1});
+
+                                setTimeout(function(){
+                                    table.reload('currentTableId');
+                                    layer.close(index); // 关闭确认框
+                                }, 2000);
+
+
+
+                            }else{
+                                layer.msg(result.msg,{icon:2});
+                                layer.close(index);
+                            }
+                        }
+                    });
+
+                });
+
+            }
+
+        });
+
+    });
+</script>
+
+</body>
+</html>

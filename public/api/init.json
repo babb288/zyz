@@ -1,0 +1,33 @@
+{
+  "homeInfo": {
+    "title": "会员管理",
+    "href": "/admin/users_list"
+  },
+  "logoInfo": {
+    "title": "User",
+    "image": "/images/logo.png",
+    "href": ""
+  },
+  "menuInfo": [
+    {
+      "title": "",
+      "icon": "fa fa-address-book",
+      "href": "",
+      "target": "_self",
+      "child": [
+        {
+          "title": "账号管理",
+          "href": "/admin/accounts_list",
+          "icon": "fa fa-asterisk",
+          "target": "_self"
+        },
+        {
+          "title": "会员管理",
+          "href": "/admin/users_list",
+          "icon": "fa fa-asterisk",
+          "target": "_self"
+        }
+      ]
+    }
+  ]
+}

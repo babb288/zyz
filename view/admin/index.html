@@ -54,6 +54,9 @@
                     <a href="javascript:;" data-clear="中/En" class="layuimini-clear" id="toggleLang">中/En</a>
                 </li>
                 
+                <li class="layui-nav-item" lay-unselect>
+                    <a href="javascript:;" data-clear="中/高棉语" class="layuimini-clear" id="toggleLangKm">中/高棉语</a>
+                </li>
                 
                 <li class="layui-nav-item" lay-unselect>
                     <a href="javascript:;" data-refresh="刷新"><i class="fa fa-refresh"></i></a>
@@ -168,6 +171,12 @@
         toggleLangCookie(); 
         location.reload();
     });
+    
+    document.getElementById('toggleLangKm').addEventListener('click', function(event) {
+        event.stopPropagation(); 
+        toggleLangCookieKm(); 
+        location.reload();
+    });
         
     function toggleLangCookie() {
 
@@ -184,25 +193,47 @@
     }
 
     let currentLang = getCookie('lang');
-    if (currentLang === 'zh_cn') {
-        setCookie('lang', 'en'); // 如果是 zh_cn，设置为 en
+    if (currentLang === 'zh_cn' || currentLang === null || currentLang === '') {
+        setCookie('lang', 'en'); // 如果是 zh_cn 或未设置，设置为 en
     } else if (currentLang === 'en') {
         setCookie('lang', 'zh_cn'); // 如果是 en，设置为 zh_cn
     } else {
-        setCookie('lang', 'zh_cn'); // 如果没有设置 lang，默认设置为 zh_cn
+        setCookie('lang', 'zh_cn'); // 其他情况，默认设置为 zh_cn
     }
 }
 
+    function toggleLangCookieKm() {
+        function getCookie(name) {
+            let value = "; " + document.cookie;
+            let parts = value.split("; " + name + "=");
+            if (parts.length === 2) return parts.pop().split(";").shift();
+            return null;
+        }
+
+        function setCookie(name, value) {
+            document.cookie = name + "=" + value + "; path=/";
+        }
+
+        let currentLang = getCookie('lang');
+        if (currentLang === 'zh_cn' || currentLang === null || currentLang === '') {
+            setCookie('lang', 'km'); // 如果是 zh_cn 或未设置，设置为 km（高棉语）
+        } else if (currentLang === 'km') {
+            setCookie('lang', 'zh_cn'); // 如果是 km，设置为 zh_cn
+        } else {
+            setCookie('lang', 'km'); // 其他情况，设置为 km
+        }
+    }
+
 
         // 百度统计代码，只统计指定域名
-        <!-- miniTongji.render({ -->
-        <!-- specific: true, -->
-        <!-- domains: [ -->
-        <!-- '99php.cn', -->
-        <!-- 'layuimini.99php.cn', -->
-        <!-- 'layuimini-onepage.99php.cn', -->
-        <!-- ], -->
-        <!-- }); -->
+        // miniTongji.render({
+        //     specific: true,
+        //     domains: [
+        //         '99php.cn',
+        //         'layuimini.99php.cn',
+        //         'layuimini-onepage.99php.cn',
+        //     ],
+        // });
 
         $('.login-out').on("click", function () {
             layer.msg('退出登录成功', function () {

@@ -29,7 +29,7 @@ class Users
         }
 
         $data['update_time'] = time();
-
+        $data['editor'] = $user_info['username'];
 
         $result = \app\model\Users::where($condition)->update($data);
 

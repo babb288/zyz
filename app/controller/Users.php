@@ -126,19 +126,16 @@ class Users
         $date_condition = [];
         
         
-        if($searchParams != null && count($condition) == 1  && (isset($condition['tiktok']) || isset($condition['phone']) )){
-            
-
-        }else{
-            if($request->user_info['type'] == 'business'){
-                $condition['operator'] = $request->user_info['username'];
-                $condition['upeer'] = $request->user_info['upeer'];
-            }
-
-            if($request->user_info['type'] == 'administrator'){
-                $condition['upeer'] = $request->user_info['username'];
-            }
-            
+//
+//            if($request->user_info['type'] == 'business'){
+//                $condition['operator'] = $request->user_info['username'];
+//                $condition['upeer'] = $request->user_info['upeer'];
+//            }
+//
+//            if($request->user_info['type'] == 'administrator'){
+//                $condition['upeer'] = $request->user_info['username'];
+//            }
+//
             
             if(isset($condition['start_date']) && $condition['start_date']){
                 $date_condition[] = ['create_time','>=',strtotime($condition['start_date'])];
@@ -149,8 +146,7 @@ class Users
                 $date_condition[] = ['create_time','<=',strtotime($condition['end_date'])];
                 unset($condition['end_date']);
             }
-        }
-        
+
         $phone_condition = [];
         if(isset($condition) && isset($condition['phone'])){
             $phone_condition = [['phone','like', '%'.$condition['phone'] ]];

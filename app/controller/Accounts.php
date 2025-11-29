@@ -49,10 +49,10 @@ class Accounts
         $user_info = $request->user_info;
 
 
-        if($data['type'] == 'business' && $user_info['type'] == 'super')
-        {
-            return json(['code' => -1,'msg' => '超级管理员不能添加业务员']);
-        }
+//        if($data['type'] == 'business' && $user_info['type'] == 'super')
+//        {
+//            return json(['code' => -1,'msg' => '超级管理员不能添加业务员']);
+//        }
 
         if($data['type'] == 'administrator' && $user_info['type'] == 'administrator')
         {

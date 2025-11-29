@@ -156,8 +156,6 @@ class Users
             $phone_condition = [['phone','like', '%'.$condition['phone'] ]];
             unset($condition['phone']);
         }
-        
-
 
         
         $result =  \app\model\Users::where($condition)->where($date_condition)->where($phone_condition)->order('id','desc')->paginate([

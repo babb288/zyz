@@ -95,14 +95,23 @@
                         
                         
                         <div class="layui-inline">
-                            <label class="layui-form-label">操作人</label>
+                            <label class="layui-form-label">上传人</label>
                             <div class="layui-input-inline">
                                 <input type="text" name="operator" autocomplete="off" class="layui-input">
                             </div>
                         </div>
-                        
-                        
-                        
+
+
+
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label">接待人</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="editor" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+
+
                         <div class="layui-inline">
                             <label class="layui-form-label">推送链接</label>
                             <div class="layui-input-inline">
@@ -285,7 +294,11 @@
                 {field: 'region', title: '地区',align:'center'},
                 {field: 'country', title: '国家',align:'center'},
 
-                {field: 'operator', title: '操作人',align:'center',width:100},
+                { title: '操作人',align:'center',width:150,
+                    templet: function(d) {
+                        return '上传人:' + d.operator + '</br> 接待人:' + (d.editor == null ? '' : d.editor);
+                    }
+                },
                 {field: 'remark', title: '备注',align:'center',width:200,templet:function(e){
                     if(e.remark != ''){
                         return '<span style="color:red;">' + e.remark + '</span>';

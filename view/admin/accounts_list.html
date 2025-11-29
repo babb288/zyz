@@ -67,7 +67,7 @@
             {{#  if(d.type == 'business'){ }}
             <span style="color:blue">业务员</span>
             {{#  } else if(d.type == 'administrator') { }}
-            <span style="color:red;">组长</span>
+            <span style="color:red;">接待人</span>
             {{#  } else if(d.type == 'super') { }}
             <span style="color:red;">超级管理员</span>
             {{#  } }}
@@ -105,7 +105,7 @@
             cols: [[
                 <!-- {type: "checkbox", width: 50}, -->
                 {field: 'id', title: 'ID',align:'center'},
-                {field: 'upeer', title: '组长',align:'center'},
+                {field: 'upeer', title: '接待人',align:'center'},
                 {field: 'username', title: '用户名',align:'center',width: 180},
                 {field: 'type',title: '类型',align:'center',templet: "#type"},
                 {field: 'remark',title: '备注',align:'center'},

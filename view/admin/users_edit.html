@@ -99,9 +99,8 @@
                 <label class="layui-form-label">聊天软件</label>
                 <div class="layui-input-block">
                     <select name="chat_soft" lay-filter="chat_soft">
-                        <option value="0" {if $user_info['chat_soft'] == 0}selected{/if}>Telegram</option>
-                        <option value="1" {if $user_info['chat_soft'] == 1}selected{/if}>WhatsApp</option>
-                        <option value="2" {if $user_info['chat_soft'] == 2}selected{/if}>TikTok</option>
+                        <option value="0" {if $user_info['chat_soft'] == 0}selected{/if}>kakao</option>
+                        <option value="1" {if $user_info['chat_soft'] == 1}selected{/if}>LINE</option>
                     </select>
                 </div>
             </div>
@@ -138,7 +137,7 @@
 
 
             <div class="layui-form-item">
-                <label class="layui-form-label">推送连接</label>
+                <label class="layui-form-label">ID</label>
                 <div class="layui-input-block">
                     <input type="text" name="push_url" lay-verify="push_url" placeholder="请输入..." class="layui-input"
                            value="{$user_info['push_url']}"  >

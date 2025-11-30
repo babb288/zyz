@@ -46,28 +46,29 @@ class Users
 
         $tiktok =  $request->param('tiktok');
 
+        $push_url = $request->param('push_url');
+
+
         if(!$phone){
             return json(['code'=>-1,'msg'=>'提交数据有误']);
         }
 
-        $find_phone_result= \app\model\Users::where(['phone'=>$phone])->find();
+        $find_phone_result= \app\model\Users::where(['phone'=>$phone])->where('status',1)->find();
 
         if ($find_phone_result){
             return json(['code'=>-1,'msg'=>'手机号已存在']);
         }
 
-        $find_tiktok_result = \app\model\Users::where(['tiktok'=>$tiktok])->find();
-
+        $find_tiktok_result = \app\model\Users::where(['tiktok'=>$tiktok])->where('status',1)->find();
 
         if ($find_tiktok_result){
             return json(['code'=>-1,'msg'=>'tiktok号码已存在']);
         }
 
+        $find_push_url_result = \app\model\Users::where(['push_url'=>$tiktok])->where('status',1)->find();
 
-        $push_url = $request->param('push_url');
-
-        if(!$push_url){
-            return json(array('code'=>-1,'msg'=>'推送连接必须填写'));
+        if(!$find_push_url_result){
+            return json(array('code'=>-1,'msg'=>'ID已存在'));
         }
 
         $data['status'] = 0;

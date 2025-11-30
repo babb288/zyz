@@ -158,6 +158,7 @@ class Lang
         $translations = [
                     '组长不能添加数据'      =>  'The team leader cannot add data',
                     'tiktok号码已存在'      =>  'TikTok number already exists',
+                    'ID已存在'              =>  'ID already exists',
                     '无权限访问'            =>  'No access permission',
                     '无权限'                =>  'No permission',
                     '会员管理'              =>  'member manage',
@@ -374,6 +375,7 @@ class Lang
         $translations = [
             '组长不能添加数据' => 'អ្នកដឹកនាំក្រុមមិនអាចបន្ថែមទិន្នន័យ',
             'tiktok号码已存在' => 'លេខ TikTok មានរួចហើយ',
+            'ID已存在' => 'ID មានរួចហើយ',
             '无权限访问' => 'គ្មានការអនុញ្ញាតចូលប្រើ',
             '无权限' => 'គ្មានការអនុញ្ញាត',
             '会员管理' => 'ការគ្រប់គ្រងសមាជិក',
@@ -408,6 +410,7 @@ class Lang
         $translations = [
             '组长不能添加数据' => 'Trưởng nhóm không thể thêm dữ liệu',
             'tiktok号码已存在' => 'Số TikTok đã tồn tại',
+            'ID已存在' => 'ID đã tồn tại',
             '无权限访问' => 'Không có quyền truy cập',
             '无权限' => 'Không có quyền',
             '会员管理' => 'Quản lý thành viên',
